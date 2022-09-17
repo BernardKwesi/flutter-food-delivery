@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/pages/cart/cart_page.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/app_constants.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -143,40 +144,44 @@ class RecommendedFoodDetails extends StatelessWidget {
                           Get.back();
                         },
                         child: AppIcon(icon: Icons.clear)),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(CartPage());
-                      },
-                      child: Stack(
-                        children: [
-                          AppIcon(icon: Icons.shopping_cart_outlined),
-                          Get.find<PopularProductController>().totalItems >= 1
-                              ? Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                        color: AppColor.mainColor,
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Center(
-                                      child: BigText(
-                                        text:
-                                            Get.find<PopularProductController>()
-                                                .totalItems
-                                                .toString(),
-                                        size: 15,
-                                        color: Colors.white,
+                    GetBuilder<PopularProductController>(builder: (controller) {
+                      return GestureDetector(
+                        onTap: () {
+                          if (controller.totalItems >= 1) {
+                            Get.toNamed(RouteHelper.getCartPage());
+                          }
+                        },
+                        child: Stack(
+                          children: [
+                            AppIcon(icon: Icons.shopping_cart_outlined),
+                            controller.totalItems >= 1
+                                ? Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    child: Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                          color: AppColor.mainColor,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Center(
+                                        child: BigText(
+                                          text: Get.find<
+                                                  PopularProductController>()
+                                              .totalItems
+                                              .toString(),
+                                          size: 15,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              : Container(),
-                        ],
-                      ),
-                    ),
+                                  )
+                                : Container(),
+                          ],
+                        ),
+                      );
+                    })
                   ],
                 ),
               ),

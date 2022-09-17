@@ -28,9 +28,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: '',
-      initialRoute: RouteHelper.initial,
-      home: HomePage(),
-      //  home: CartPage(),
+      initialRoute: RouteHelper.getInitial(),
       getPages: RouteHelper.routes,
     );
   }

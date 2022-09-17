@@ -1,3 +1,5 @@
+import 'package:food_delivery/models/product.dart';
+
 class Cart {
   int? id;
   String? name;
@@ -6,6 +8,7 @@ class Cart {
   int? quantity;
   bool? isExist;
   String? time;
+  Products? product;
 
   Cart({
     this.id,
@@ -15,6 +18,7 @@ class Cart {
     this.quantity,
     this.isExist,
     this.time,
+    this.product,
   });
 
   Cart.fromJson(Map<String, dynamic> json) {
@@ -25,5 +29,6 @@ class Cart {
     quantity = json['quantity'];
     isExist = json['isExist'];
     time = json['time'];
+    product = Products.fromJson(json['product']);
   }
 }

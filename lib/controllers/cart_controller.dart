@@ -16,6 +16,7 @@ class CartController extends GetxController {
     if (_items.containsKey(product.id)) {
       _items.update(product.id!, (value) {
         totalQuantity = value.quantity! + quantity;
+
         return Cart(
           id: value.id,
           name: value.name,
@@ -24,6 +25,7 @@ class CartController extends GetxController {
           quantity: value.quantity! + quantity,
           isExist: true,
           time: DateTime.now.toString(),
+          product: product,
         );
       });
 
@@ -41,6 +43,7 @@ class CartController extends GetxController {
             quantity: quantity,
             isExist: true,
             time: DateTime.now.toString(),
+            product: product,
           );
         });
       } else {
@@ -88,5 +91,15 @@ class CartController extends GetxController {
     return _items.entries.map((e) {
       return e.value;
     }).toList();
+  }
+
+  int get totalAmount {
+    var total = 0;
+
+    _items.forEach((key, value) {
+      total += value.quantity! * value.price!;
+    });
+
+    return total;
   }
 }

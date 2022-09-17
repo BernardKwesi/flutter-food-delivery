@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^2.3.1
   get: ^4.6.1
   dots_indicator: ^2.1.0
+  persistent_bottom_nav_bar: ^5.0.2
 
 dev_dependencies:
   flutter_test:
